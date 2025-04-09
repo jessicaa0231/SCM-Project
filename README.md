@@ -28,14 +28,14 @@ Anyone – Preserve moments you want to remember years from now
 🛠 Technologies Will be Used
 Frontend: HTML, CSS, JavaScript
 
-Storage: LocalStorage (basic) 
+Storage: LocalStorage 
 
-Auth: Firebase Auth 
+Auth: Firebase Auth or custom backend authentication
 
-Email Notifications: JavaScript timers 
+Email Notifications: JavaScript timers or Nodemailer
 
 💡 The Problem It Solves
 People often reflect on the past, but rarely save their thoughts or milestones in a structured way. This platform provides a way to preserve memories and revisit them in the future—creating a digital version of a nostalgic tradition.
 
 🚧 Status
-Currently in development.
+Currently in development.
