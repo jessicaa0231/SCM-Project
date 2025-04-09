@@ -30,6 +30,8 @@ Frontend: HTML, CSS, JavaScript
 
 Storage: LocalStorage 
 
+
+ 
 Auth: Firebase Auth or custom backend authentication
 
 Email Notifications: JavaScript timers or Nodemailer
