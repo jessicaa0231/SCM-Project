@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Capsules</title>
+  <link rel="stylesheet" href="capsule.css" />
+  <link rel="stylesheet" href="mycapsule.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">🕒 TimeCapsule</div>
+      <nav>
+        <a class="active" href="mycapsule.html">🗃️ My Capsules</a>
+
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="capsule.html">💊 Create a Capsule</a>
+        <a href="about.html">ℹ️ About</a>
+        <a href="profile.html">👤 Profile</a>
+    
+   
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h2>My Capsules</h2>
+        <div class="top-right">
+          <input type="text" placeholder="Search..." class="search-bar" />
+          <div class="notification">🔔<span class="badge">1</span></div>
+          <div class="profile" id="top-username">👤 User</div>
+          
+        </div>
+      </header>
+
+      <section id="capsuleList"></section>
+
+    </main>
+  </div>
+
+  <script src="mycapsule.js"></script>
+</body>
+</html>
