@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TimeCapsule Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">🕒 TimeCapsule</div>
+      <nav>
+        <a class="active" href="#">🏠 Dashboard</a>
+        <a href="mycapsule.html">🗃️ My Capsules</a>
+        <a href="about.html">ℹ️ About</a>
+        <a href="profile.html">👤 Profile</a>
+    
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h2>Dashboard</h2>
+        <div class="top-right">
+          <input type="text" placeholder="Search..." class="search-bar" />
+          <div class="notification">🔔<span class="badge">3</span></div>
+          <div class="profile" id="top-username">👤 User</div>
+        </div>
+      </header>
+
+      <section class="welcome">
+        <h1>Welcome back, <span id="username">User</span>!</h1>
+        <p>Here's what's happening with your time capsules</p>
+      </section>
+
+      <section class="stats">
+        <div class="card">
+          <div class="icon">📦</div>
+          <div>
+            <p>Total Capsules</p>
+            <h3 id="totalCapsules">0</h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">🔒</div>
+          <div>
+            <p>Upcoming Unlocks</p>
+            <h3 id="upcomingUnlocks">0</h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">🔗</div>
+          <div>
+            <p>Shared With Me</p>
+            <h3>0</h3>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">🕒</div>
+          <div>
+            <p>Next Unlock</p>
+            <h3 id="nextUnlock">N/A</h3>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="create-btn" onclick="window.location.href='capsule.html'">+ Create New Capsule</button>
+        <a href="mycapsule.html" class="view-all">View All</a>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Set dummy username if not already set
+    if (!localStorage.getItem('username')) {
+      localStorage.setItem('username', 'Alice');
+    }
+
+    const username = localStorage.getItem('username') || 'User';
+    document.getElementById('username').textContent = username;
+    document.getElementById('top-username').textContent = `👤 ${username}`;
+
+    // Get capsules from localStorage
+    const capsules = JSON.parse(localStorage.getItem('capsules')) || [];
+
+    // Total Capsules
+    document.getElementById('totalCapsules').textContent = capsules.length;
+
+    // Upcoming Unlocks and Next Unlock Calculation
+    const now = new Date();
+    const futureCapsules = capsules.filter(capsule => new Date(capsule.unlockDate) > now);
+    document.getElementById('upcomingUnlocks').textContent = futureCapsules.length;
+
+    if (futureCapsules.length > 0) {
+      const nextUnlockDate = futureCapsules
+        .map(c => new Date(c.unlockDate))
+        .sort((a, b) => a - b)[0];
+
+      const daysLeft = Math.ceil((nextUnlockDate - now) / (1000 * 60 * 60 * 24));
+      document.getElementById('nextUnlock').textContent = `${daysLeft} Days`;
+    } else {
+      document.getElementById('nextUnlock').textContent = 'N/A';
+    }
+  </script>
+</body>
+</html>
