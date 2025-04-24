@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Capsule</title>
+  <link rel="stylesheet" href="capsule.css" />
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">🕒 TimeCapsule</div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a class="active" href="#">➕ Create Capsule</a>
+        
+        <a href="mycapsule.html">🗃️ My Capsules</a>
+        <a href="about.html">ℹ️ About</a>
+        <a href="profile.html">👤 Profile</a>
+    
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h2>Create New Capsule</h2>
+        <div class="top-right">
+          <input type="text" placeholder="Search..." class="search-bar" />
+          <div class="notification">🔔<span class="badge">1</span></div>
+          <div class="profile" id="top-username">👤 User</div>
+        </div>
+      </header>
+
+      <section class="form-section">
+        <form class="capsule-form">
+          <label for="title">Capsule Title</label>
+          <input type="text" id="title" placeholder="e.g. Letter to Future Me" required />
+
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="Write a short description..." rows="3"></textarea>
+
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Your message..." rows="6" required></textarea>
+
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="">Select a category</option>
+            <option value="personal">Personal</option>
+            <option value="event">Event</option>
+            <option value="letter">Letter</option>
+            <option value="memory">Memory</option>
+          </select>
+
+          <label for="unlock-date">Unlock Date</label>
+          <input type="date" id="unlock-date" required />
+
+          <label for="folder">Folder</label>
+          <input type="text" id="folder" placeholder="Optional folder name" />
+
+          <label for="image">Upload Image</label>
+          <input type="file" id="image" accept="image/*" />
+
+          <button type="submit" class="submit-btn">Create Capsule</button>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script src="capsule.js"></script>
+  
+</body>
+</html>
