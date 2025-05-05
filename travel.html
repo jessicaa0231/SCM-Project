@@ -1,1 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Memories</title>
+    <link rel="stylesheet" href="travel.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    /* Base Styles */
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffe66d;
+    --dark-color: #2d3436;
+    --light-color: #f9f9f9;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+    --font-heading: "Playfair Display", serif;
+    --font-body: "Poppins", sans-serif;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    background-color: #f5f7fa;
+    color: var(--dark-color);
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    margin-top: -50px;
+  }
+  
+  /* Header Styles */
+  .parallax-header {
+    height: 50vh;
+    min-height: 300px;
+    background-image: url("https://source.unsplash.com/1600x900/?travel,landscape");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+  }
+  
+  .header-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+  }
+  
+  .header-content h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Tab Navigation */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 10px;
+  }
+  
+  .tab-btn {
+    padding: 12px 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: var(--border-radius);
+    margin: 0 5px;
+    color: #555;
+    display: flex;
+    align-items: center;
+  }
+  
+  .tab-btn i {
+    margin-right: 8px;
+  }
+  
+  .tab-btn:hover {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+  }
+  
+  .tab-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  /* Tab Content */
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.5s;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Form Styles */
+  .form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .form-container h2 {
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+  }
+  
+  input[type="file"] {
+    padding: 10px 0;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .btn-primary:hover {
+    background-color: #ff5252;
+    transform: translateY(-2px);
+  }
+  
+  /* Rating System */
+  .rating-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  
+  .rating input {
+    display: none;
+  }
+  
+  .rating label {
+    cursor: pointer;
+    width: 30px;
+    font-size: 1.5rem;
+    color: #ddd;
+    transition: var(--transition);
+  }
+  
+  .rating label:hover,
+  .rating label:hover ~ label,
+  .rating input:checked ~ label {
+    color: var(--accent-color);
+  }
+  
+  /* Image Preview */
+  .image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .image-preview {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  
+  /* Memories View */
+  .memories-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+    background-color: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+  }
+  
+  .search-container {
+    position: relative;
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .search-container input {
+    width: 100%;
+    padding: 10px 35px 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+  }
+  
+  .search-container i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+  }
+  
+  .filter-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .filter-container select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .view-options {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .view-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .view-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .view-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+  
+  /* Memories Container */
+  #memories-container {
+    margin-top: 20px;
+  }
+  
+  #memories-container.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  #memories-container.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .memory-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+  }
+  
+  .memory-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .memory-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    z-index: 2;
+  }
+  
+  .category-sightseeing {
+    background-color: #4361ee;
+    color: white;
+  }
+  
+  .category-food {
+    background-color: #f72585;
+    color: white;
+  }
+  
+  .category-adventure {
+    background-color: #ff9e00;
+    color: white;
+  }
+  
+  .category-culture {
+    background-color: #7209b7;
+    color: white;
+  }
+  
+  .category-nature {
+    background-color: #38b000;
+    color: white;
+  }
+  
+  .category-relaxation {
+    background-color: #4cc9f0;
+    color: white;
+  }
+  
+  .category-other {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .memory-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .memory-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .memory-card:hover .memory-image {
+    transform: scale(1.05);
+  }
+  
+  .memory-image-count {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+  
+  .memory-content {
+    padding: 20px;
+  }
+  
+  .memory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .memory-title-location {
+    flex: 1;
+  }
+  
+  .memory-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+  }
+  
+  .memory-location {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .memory-location i {
+    margin-right: 5px;
+    color: var(--primary-color);
+  }
+  
+  .memory-date {
+    color: #888;
+    font-size: 0.9rem;
+  }
+  
+  .memory-rating {
+    display: flex;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+  }
+  
+  .memory-text {
+    margin-bottom: 15px;
+    color: #555;
+    display: -webkit-box;
+    
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .memory-companions {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .memory-companions i {
+    margin-right: 5px;
+    color: var(--secondary-color);
+  }
+  
+  .memory-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .btn-action {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-action i {
+    margin-right: 5px;
+  }
+  
+  .btn-view {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+  
+  .btn-edit {
+    color: #4a69bd;
+    border-color: #4a69bd;
+  }
+  
+  .btn-delete {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-action:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* List View Specific Styles */
+  #memories-container.list-view .memory-card {
+    display: flex;
+    height: 150px;
+  }
+  
+  #memories-container.list-view .memory-image-container {
+    width: 200px;
+    height: 100%;
+    flex-shrink: 0;
+  }
+  
+  #memories-container.list-view .memory-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #memories-container.list-view .memory-text {
+    flex: 1;
+  }
+  
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    grid-column: 1 / -1;
+  }
+  
+  .empty-state i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  .empty-state p {
+    font-size: 1.1rem;
+    color: #666;
+  }
+  
+  /* Stats Section */
+  .stats-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+  }
+  
+  .stats-container h2 {
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+  }
+  
+  .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .stat-card {
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-right: 15px;
+  }
+  
+  .stat-info h3 {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .stat-info p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--dark-color);
+  }
+  
+  .stats-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .chart-container {
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .chart-container h3 {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .chart {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .placeholder-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 5px;
+  }
+  
+  .destinations-list {
+    padding: 10px;
+  }
+  
+  .destination-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .destination-item:last-child {
+    border-bottom: none;
+  }
+  
+  .destination-name {
+    display: flex;
+    align-items: center;
+  }
+  
+  .destination-name i {
+    margin-right: 10px;
+    color: var(--primary-color);
+  }
+  
+  .destination-count {
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+  }
+  
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    max-width: 800px;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #888;
+    transition: var(--transition);
+  }
+  
+  .close-modal:hover {
+    color: var(--primary-color);
+  }
+  
+  #welcome-modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-family: var(--font-heading);
+  }
+  
+  #welcome-modal p {
+    margin-bottom: 15px;
+  }
+  
+  #welcome-modal ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  #welcome-modal li {
+    margin-bottom: 10px;
+  }
+  
+  #welcome-modal i {
+    color: var(--primary-color);
+    margin-right: 5px;
+  }
+  
+  /* Memory Detail */
+  .memory-detail-header {
+    margin-bottom: 20px;
+  }
+  
+  .memory-detail-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+  }
+  
+  .memory-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .memory-detail-meta-item {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .memory-detail-meta-item i {
+    margin-right: 5px;
+    color: var(--primary-color);
+  }
+  
+  .memory-detail-rating {
+    display: flex;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+  }
+  
+  .memory-detail-content {
+    margin-bottom: 30px;
+    line-height: 1.8;
+  }
+  
+  .memory-detail-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .gallery-image:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer-quote {
+    font-style: italic;
+    margin-top: 10px;
+    opacity: 0.8;
+    font-family: var(--font-heading);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .header-content h1 {
+      font-size: 2.5rem;
+    }
+  
+    .form-row {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .memories-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .search-container {
+      max-width: 100%;
+    }
+  
+    .filter-container {
+      flex-direction: column;
+    }
+  
+    .stats-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .stats-charts {
+      grid-template-columns: 1fr;
+    }
+  
+    #memories-container.list-view .memory-card {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    #memories-container.list-view .memory-image-container {
+      width: 100%;
+      height: 200px;
+    }
+  
+    .modal-content {
+      margin: 20px auto;
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .parallax-header {
+      height: 40vh;
+    }
+  
+    .header-content h1 {
+      font-size: 2rem;
+    }
+  
+    .tabs {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .tab-btn {
+      margin: 0;
+    }
+  
+    .stats-cards {
+      grid-template-columns: 1fr;
+    }
+  
+    .memory-detail-gallery {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+</style>
+<body>
+    <div class="parallax-header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1><i class="fas fa-globe-americas"></i> Travel Memories</h1>
+            <p class="tagline">Capture the world, one memory at a time</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="add-memory">
+                <i class="fas fa-plus-circle"></i> Add Memory
+            </button>
+            <button class="tab-btn" data-tab="view-memories">
+                <i class="fas fa-images"></i> View Memories
+            </button>
+            <button class="tab-btn" data-tab="stats">
+                <i class="fas fa-chart-pie"></i> Travel Stats
+            </button>
+        </div>
+
+        <main>
+            <section id="add-memory" class="tab-content active">
+                <div class="form-container">
+                    <h2>Capture a Travel Memory</h2>
+                    <form id="memory-form">
+                        <div class="form-group">
+                            <label for="memory-title">Title</label>
+                            <input type="text" id="memory-title" required placeholder="Give your memory a title">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="memory-location">Location</label>
+                                <input type="text" id="memory-location" required placeholder="City, Country">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="memory-date">Date</label>
+                                <input type="date" id="memory-date" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-category">Category</label>
+                            <select id="memory-category" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="sightseeing">Sightseeing</option>
+                                <option value="food">Food & Dining</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="culture">Cultural Experience</option>
+                                <option value="nature">Nature & Landscapes</option>
+                                <option value="relaxation">Relaxation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <div class="rating-container">
+                                <div class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" />
+                                    <label for="star5"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star4" name="rating" value="4" />
+                                    <label for="star4"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star3" name="rating" value="3" />
+                                    <label for="star3"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star2" name="rating" value="2" />
+                                    <label for="star2"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star1" name="rating" value="1" />
+                                    <label for="star1"><i class="fas fa-star"></i></label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-text">Your Memory</label>
+                            <textarea id="memory-text" rows="5" required placeholder="Describe your experience..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-companions">Travel Companions (Optional)</label>
+                            <input type="text" id="memory-companions" placeholder="Who were you with?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-images">Upload Images</label>
+                            <input type="file" id="memory-images" accept="image/*" multiple>
+                            <div id="image-preview-container" class="image-preview-container">
+                                <!-- Image previews will be added here -->
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Save Memory <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-memories" class="tab-content">
+                <div class="memories-controls">
+                    <div class="search-container">
+                        <input type="text" id="search-memories" placeholder="Search memories...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="filter-container">
+                        <select id="filter-category">
+                            <option value="all">All Categories</option>
+                            <option value="sightseeing">Sightseeing</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="culture">Cultural Experience</option>
+                            <option value="nature">Nature & Landscapes</option>
+                            <option value="relaxation">Relaxation</option>
+                            <option value="other">Other</option>
+                        </select>
+                        
+                        <select id="filter-year">
+                            <option value="all">All Years</option>
+                            <!-- Years will be added dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="view-options">
+                        <button id="grid-view" class="view-btn active"><i class="fas fa-th"></i></button>
+                        <button id="list-view" class="view-btn"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <div id="memories-container" class="grid-view">
+                    <div id="no-memories" class="empty-state">
+                        <i class="fas fa-suitcase"></i>
+                        <p>No travel memories yet. Start by adding your first adventure!</p>
+                    </div>
+                    <!-- Memories will be added here dynamically -->
+                </div>
+            </section>
+
+            <section id="stats" class="tab-content">
+                <div class="stats-container">
+                    <h2>Your Travel Statistics</h2>
+                    
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Places Visited</h3>
+                                <p id="stat-places">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Countries</h3>
+                                <p id="stat-countries">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Memories</h3>
+                                <p id="stat-memories">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Photos</h3>
+                                <p id="stat-photos">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-charts">
+                        <div class="chart-container">
+                            <h3>Memories by Category</h3>
+                            <div id="category-chart" class="chart">
+                                <!-- Chart will be rendered here -->
+                                <div class="placeholder-chart">
+                                    <div class="chart-legend">
+                                        <!-- Legend items will be added dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Top Destinations</h3>
+                            <div id="destinations-list" class="destinations-list">
+                                <!-- Top destinations will be added here -->
+                                <p class="no-data">Add more memories to see your top destinations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2><i class="fas fa-globe-americas"></i> Welcome to Travel Memories!</h2>
+                <p>Your personal travel journal to capture and relive your adventures around the world.</p>
+                <ul>
+                    <li><i class="fas fa-camera"></i> <strong>Capture memories</strong> with photos and descriptions</li>
+                    <li><i class="fas fa-map-marker-alt"></i> <strong>Record locations</strong> of your adventures</li>
+                    <li><i class="fas fa-search"></i> <strong>Find memories</strong> by location, category, or date</li>
+                    <li><i class="fas fa-chart-pie"></i> <strong>View statistics</strong> about your travels</li>
+                </ul>
+                <p>Your memories are stored locally on your device.</p>
+                <button id="get-started" class="btn-primary">Start Your Journey</button>
+            </div>
+        </div>
+
+        <div id="memory-detail-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="memory-detail-content">
+                    <!-- Memory details will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Travel Memories &copy; <span id="current-year"></span></p>
+            <p class="footer-quote">"The world is a book, and those who do not travel read only one page." — Saint Augustine</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // DOM Elements
+            const tabBtns = document.querySelectorAll(".tab-btn")
+            const tabContents = document.querySelectorAll(".tab-content")
+            const letterForm = document.getElementById("letter-form")
+            const letterContent = document.getElementById("letter-content")
+            const letterContentHidden = document.getElementById("letter-content-hidden")
+            const editorButtons = document.querySelectorAll(".editor-toolbar button")
+            const lettersContainer = document.getElementById("letters-container")
+            const noLettersEl = document.getElementById("no-letters")
+            const searchInputLetters = document.getElementById("search-letters")
+            const filterSelect = document.getElementById("filter-letters")
+            const welcomeModal = document.getElementById("welcome-modal")
+            const letterDetailModal = document.getElementById("letter-detail-modal")
+            const closeModalBtns = document.querySelectorAll(".close-modal")
+            const getStartedBtn = document.getElementById("get-started")
+            const currentYearEl = document.getElementById("current-year")
+          
+            // Stats elements
+            const statPlaces = document.getElementById("stat-places")
+            const statCountries = document.getElementById("stat-countries")
+            const statMemories = document.getElementById("stat-memories")
+            const statPhotos = document.getElementById("stat-photos")
+            const categoryChart = document.getElementById("category-chart")
+            const destinationsList = document.getElementById("destinations-list")
+          
+            // Memory elements
+            const memoryForm = document.getElementById("memory-form")
+            const memoryImagesInput = document.getElementById("memory-images")
+            const imagePreviewContainer = document.getElementById("image-preview-container")
+            const memoriesContainer = document.getElementById("memories-container")
+            const noMemoriesEl = document.getElementById("no-memories")
+            const searchInput = document.getElementById("search-memories")
+            const filterCategory = document.getElementById("filter-category")
+            const filterYear = document.getElementById("filter-year")
+            const gridViewBtn = document.getElementById("grid-view")
+            const listViewBtn = document.getElementById("list-view")
+            const memoryDetailModal = document.getElementById("memory-detail-modal")
+          
+            // Set current year in footer
+            currentYearEl.textContent = new Date().getFullYear()
+          
+            // Set minimum date for delivery to tomorrow
+            const tomorrow = new Date()
+            tomorrow.setDate(tomorrow.getDate() + 1)
+            document.getElementById("delivery-date").min = tomorrow.toISOString().split("T")[0]
+          
+            // Initialize letters array from localStorage
+            let letters = JSON.parse(localStorage.getItem("futureLetters")) || []
+          
+            // Initialize memories array from localStorage
+            let memories = JSON.parse(localStorage.getItem("travelMemories")) || []
+          
+            // Image data array for the current form
+            let currentImages = []
+          
+            // Show welcome modal if first visit
+            if (!localStorage.getItem("welcomeShown")) {
+              welcomeModal.style.display = "block"
+              localStorage.setItem("welcomeShown", "true")
+            }
+          
+            // Tab Navigation
+            tabBtns.forEach((btn) => {
+              btn.addEventListener("click", () => {
+                const tabId = btn.getAttribute("data-tab")
+          
+                // Update active tab button
+                tabBtns.forEach((b) => b.classList.remove("active"))
+                btn.classList.add("active")
+          
+                // Show selected tab content
+                tabContents.forEach((content) => {
+                  content.classList.remove("active")
+                  if (content.id === tabId) {
+                    content.classList.add("active")
+          
+                    // If switching to view letters tab, refresh the letters display
+                    if (tabId === "view-letters") {
+                      displayLetters()
+                    } else if (tabId === "view-memories") {
+                      displayMemories()
+                    } else if (tabId === "stats") {
+                      updateStats()
+                    }
+                  }
+                })
+              })
+            })
+          
+            // Rich Text Editor
+            editorButtons.forEach((button) => {
+              button.addEventListener("click", () => {
+                const command = button.getAttribute("data-command")
+          
+                if (command === "createLink") {
+                  const url = prompt("Enter the link URL:")
+                  if (url) document.execCommand(command, false, url)
+                } else {
+                  document.execCommand(command, false, null)
+                }
+          
+                // Focus back on the editor
+                letterContent.focus()
+              })
+            })
+          
+            // Letter Form Submission
+            letterForm.addEventListener("submit", (e) => {
+              e.preventDefault()
+          
+              // Get form values
+              const title = document.getElementById("letter-title").value
+              const recipient = document.getElementById("recipient").value
+              const deliveryDate = document.getElementById("delivery-date").value
+              const emailNotification = document.getElementById("email-notification").value
+          
+              // Get content from the rich text editor
+              letterContentHidden.value = letterContent.innerHTML
+          
+              // Create letter object
+              const letter = {
+                id: Date.now().toString(),
+                title,
+                recipient,
+                content: letterContent.innerHTML,
+                createdAt: new Date().toISOString(),
+                deliveryDate,
+                emailNotification,
+                isOpened: false,
+              }
+          
+              // Add to letters array
+              letters.push(letter)
+          
+              // Save to localStorage
+              localStorage.setItem("futureLetters", JSON.stringify(letters))
+          
+              // Reset form
+              letterForm.reset()
+              letterContent.innerHTML = ""
+          
+              // Show success message
+              alert("Your letter has been sent to your future self!")
+          
+              // Switch to view letters tab
+              document.querySelector('[data-tab="view-letters"]').click()
+            })
+          
+            // Image Upload Preview
+            memoryImagesInput.addEventListener("change", (e) => {
+              const files = Array.from(e.target.files)
+          
+              files.forEach((file) => {
+                if (file.type.match("image.*")) {
+                  const reader = new FileReader()
+          
+                  reader.onload = (event) => {
+                    const imageData = event.target.result
+                    addImagePreview(imageData)
+                    currentImages.push(imageData)
+                  }
+          
+                  reader.readAsDataURL(file)
+                }
+              })
+            })
+          
+            // Add Image Preview
+            function addImagePreview(imageData) {
+              const previewDiv = document.createElement("div")
+              previewDiv.className = "image-preview"
+          
+              const img = document.createElement("img")
+              img.src = imageData
+              img.alt = "Preview"
+          
+              const removeBtn = document.createElement("button")
+              removeBtn.className = "remove-image"
+              removeBtn.innerHTML = '<i class="fas fa-times"></i>'
+              removeBtn.addEventListener("click", () => {
+                const index = currentImages.indexOf(imageData)
+                if (index > -1) {
+                  currentImages.splice(index, 1)
+                }
+                previewDiv.remove()
+              })
+          
+              previewDiv.appendChild(img)
+              previewDiv.appendChild(removeBtn)
+              imagePreviewContainer.appendChild(previewDiv)
+            }
+          
+            // Memory Form Submission
+            memoryForm.addEventListener("submit", (e) => {
+              e.preventDefault()
+          
+              // Get form values
+              const title = document.getElementById("memory-title").value
+              const location = document.getElementById("memory-location").value
+              const date = document.getElementById("memory-date").value
+              const category = document.getElementById("memory-category").value
+              const text = document.getElementById("memory-text").value
+              const companions = document.getElementById("memory-companions").value
+          
+              // Get rating
+              const ratingInput = document.querySelector('input[name="rating"]:checked')
+              const rating = ratingInput ? Number.parseInt(ratingInput.value) : 0
+          
+              // Create memory object
+              const memory = {
+                id: Date.now().toString(),
+                title,
+                location,
+                date,
+                category,
+                text,
+                companions,
+                rating,
+                images: currentImages,
+                createdAt: new Date().toISOString(),
+              }
+          
+              // Add to memories array
+              memories.push(memory)
+          
+              // Save to localStorage
+              localStorage.setItem("travelMemories", JSON.stringify(memories))
+          
+              // Reset form and image previews
+              memoryForm.reset()
+              imagePreviewContainer.innerHTML = ""
+              currentImages = []
+          
+              // Show success message
+              alert("Memory saved successfully!")
+          
+              // Switch to view memories tab
+              document.querySelector('[data-tab="view-memories"]').click()
+            })
+          
+            // Display Letters
+            function displayLetters(searchTerm = "", filterValue = "all") {
+              // Filter letters based on search term and filter value
+              let filteredLetters = letters
+          
+              if (searchTerm) {
+                const term = searchTerm.toLowerCase()
+                filteredLetters = filteredLetters.filter(
+                  (letter) =>
+                    letter.title.toLowerCase().includes(term) ||
+                    letter.recipient.toLowerCase().includes(term) ||
+                    letter.content.toLowerCase().includes(term),
+                )
+              }
+          
+              if (filterValue !== "all") {
+                const today = new Date()
+                today.setHours(0, 0, 0, 0)
+          
+                filteredLetters = filteredLetters.filter((letter) => {
+                  const deliveryDate = new Date(letter.deliveryDate)
+                  deliveryDate.setHours(0, 0, 0, 0)
+          
+                  if (filterValue === "pending") {
+                    return deliveryDate > today && !letter.isOpened
+                  } else if (filterValue === "ready") {
+                    return deliveryDate <= today && !letter.isOpened
+                  } else if (filterValue === "opened") {
+                    return letter.isOpened
+                  }
+                  return true
+                })
+              }
+          
+              // Sort letters by delivery date (soonest first)
+              filteredLetters.sort((a, b) => new Date(a.deliveryDate) - new Date(b.deliveryDate))
+          
+              // Clear current letters display
+              lettersContainer.innerHTML = ""
+          
+              // Show empty state if no letters
+              if (filteredLetters.length === 0) {
+                lettersContainer.appendChild(noLettersEl)
+                return
+              }
+          
+              // Create letter cards
+              filteredLetters.forEach((letter) => {
+                const letterCard = document.createElement("div")
+                letterCard.className = "letter-card"
+          
+                // Format dates
+                const createdDate = new Date(letter.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+          
+                const deliveryDate = new Date(letter.deliveryDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+          
+                // Check if letter is ready to open
+                const today = new Date()
+                today.setHours(0, 0, 0, 0)
+                const letterDeliveryDate = new Date(letter.deliveryDate)
+                letterDeliveryDate.setHours(0, 0, 0, 0)
+                const isReady = letterDeliveryDate <= today
+                const isOpened = letter.isOpened
+          
+                // Determine letter status
+                let statusClass = "status-pending"
+                let statusText = "Pending"
+          
+                if (isOpened) {
+                  statusClass = "status-opened"
+                  statusText = "Opened"
+                } else if (isReady) {
+                  statusClass = "status-ready"
+                  statusText = "Ready to Open"
+                }
+          
+                // Calculate countdown
+                let countdownText = ""
+                if (!isOpened && !isReady) {
+                  const diffTime = Math.abs(letterDeliveryDate - today)
+                  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+                  countdownText = `${diffDays} day${diffDays !== 1 ? "s" : ""} until delivery`
+                }
+          
+                // Create a preview of the content (strip HTML tags)
+                const tempDiv = document.createElement("div")
+                tempDiv.innerHTML = letter.content
+                const contentPreview = tempDiv.textContent || tempDiv.innerText
+          
+                // Create letter card HTML
+                letterCard.innerHTML = `
+                          <span class="letter-status ${statusClass}">${statusText}</span>
+                          <div class="letter-content">
+                              <div class="letter-header">
+                                  <h3 class="letter-title">${letter.title}</h3>
+                                  <p class="letter-recipient">${letter.recipient}</p>
+                              </div>
+                              <div class="letter-dates">
+                                  <span>Written: ${createdDate}</span>
+                                  <span>Delivery: ${deliveryDate}</span>
+                              </div>
+                              <p class="letter-preview">${contentPreview}</p>
+                              <div class="letter-actions">
+                                  ${countdownText ? `<span class="delivery-countdown">${countdownText}</span>` : `<span></span>`}
+                                  <div>
+                                      <button class="btn-action btn-open" data-id="${
+                                        letter.id
+                                      }" ${!isReady && !isOpened ? "disabled" : ""}>
+                                          ${isOpened ? '<i class="fas fa-envelope-open"></i> Read Again' : '<i class="fas fa-envelope-open-text"></i> Open'}
+                                      </button>
+                                      <button class="btn-action btn-delete" data-id="${letter.id}">
+                                          <i class="fas fa-trash"></i>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      `
+          
+                lettersContainer.appendChild(letterCard)
+              })
+          
+              // Add event listeners to letter action buttons
+              addLetterActionListeners()
+            }
+          
+            // Display Memories
+            function displayMemories(searchTerm = "", categoryFilter = "all", yearFilter = "all") {
+              // Filter memories based on search term and filters
+              let filteredMemories = memories
+          
+              if (searchTerm) {
+                const term = searchTerm.toLowerCase()
+                filteredMemories = filteredMemories.filter(
+                  (memory) =>
+                    memory.title.toLowerCase().includes(term) ||
+                    memory.location.toLowerCase().includes(term) ||
+                    memory.text.toLowerCase().includes(term),
+                )
+              }
+          
+              if (categoryFilter !== "all") {
+                filteredMemories = filteredMemories.filter((memory) => memory.category === categoryFilter)
+              }
+          
+              if (yearFilter !== "all") {
+                filteredMemories = filteredMemories.filter((memory) => {
+                  const memoryYear = new Date(memory.date).getFullYear().toString()
+                  return memoryYear === yearFilter
+                })
+              }
+          
+              // Sort memories by date (newest first)
+              filteredMemories.sort((a, b) => new Date(b.date) - new Date(a.date))
+          
+              // Clear current memories display
+              memoriesContainer.innerHTML = ""
+          
+              // Show empty state if no memories
+              if (filteredMemories.length === 0) {
+                memoriesContainer.appendChild(noMemoriesEl)
+                return
+              }
+          
+              // Create memory cards
+              filteredMemories.forEach((memory) => {
+                const memoryCard = document.createElement("div")
+                memoryCard.className = "memory-card"
+                memoryCard.setAttribute("data-id", memory.id)
+          
+                // Format date
+                const formattedDate = new Date(memory.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+          
+                // Get category display name
+                const categoryDisplayNames = {
+                  sightseeing: "Sightseeing",
+                  food: "Food & Dining",
+                  adventure: "Adventure",
+                  culture: "Cultural Experience",
+                  nature: "Nature & Landscapes",
+                  relaxation: "Relaxation",
+                  other: "Other",
+                }
+          
+                // Create rating stars
+                let ratingStars = ""
+                for (let i = 1; i <= 5; i++) {
+                  if (i <= memory.rating) {
+                    ratingStars += '<i class="fas fa-star"></i>'
+                  } else {
+                    ratingStars += '<i class="far fa-star"></i>'
+                  }
+                }
+          
+                // Create memory card HTML
+                memoryCard.innerHTML = `
+                  <span class="memory-category category-${memory.category}">${categoryDisplayNames[memory.category]}</span>
+                  <div class="memory-image-container">
+                    ${
+                      memory.images.length > 0
+                        ? `<img src="${memory.images[0]}" alt="${memory.title}" class="memory-image">
+                      ${memory.images.length > 1 ? `<span class="memory-image-count">+${memory.images.length - 1}</span>` : ""}`
+                        : `<img src="https://source.unsplash.com/300x200/?${encodeURIComponent(memory.category)},travel" alt="${memory.title}" class="memory-image">`
+                    }
+                  </div>
+                  <div class="memory-content">
+                    <div class="memory-header">
+                      <div class="memory-title-location">
+                        <h3 class="memory-title">${memory.title}</h3>
+                        <p class="memory-location"><i class="fas fa-map-marker-alt"></i> ${memory.location}</p>
+                      </div>
+                      <span class="memory-date">${formattedDate}</span>
+                    </div>
+                    <div class="memory-rating">${ratingStars}</div>
+                    <p class="memory-text">${memory.text}</p>
+                    ${memory.companions ? `<p class="memory-companions"><i class="fas fa-users"></i> With: ${memory.companions}</p>` : ""}
+                    <div class="memory-actions">
+                      <button class="btn-action btn-view" data-id="${memory.id}">
+                        <i class="fas fa-eye"></i> View
+                      </button>
+                      <button class="btn-action btn-edit" data-id="${memory.id}">
+                        <i class="fas fa-edit"></i> Edit
+                      </button>
+                      <button class="btn-action btn-delete" data-id="${memory.id}">
+                        <i class="fas fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                `
+          
+                memoriesContainer.appendChild(memoryCard)
+              })
+          
+              // Add event listeners to memory action buttons
+              addMemoryActionListeners()
+            }
+          
+            // Add event listeners to letter action buttons
+            function addLetterActionListeners() {
+              // Open letter
+              document.querySelectorAll(".btn-open").forEach((btn) => {
+                btn.addEventListener("click", function () {
+                  const letterId = this.getAttribute("data-id")
+                  openLetter(letterId)
+                })
+              })
+          
+              // Delete letter
+              document.querySelectorAll(".btn-delete").forEach((btn) => {
+                btn.addEventListener("click", function () {
+                  const letterId = this.getAttribute("data-id")
+                  deleteLetter(letterId)
+                })
+              })
+            }
+          
+            // Add event listeners to memory action buttons
+            function addMemoryActionListeners() {
+              // View memory
+              document.querySelectorAll(".btn-view").forEach((btn) => {
+                btn.addEventListener("click", function () {
+                  const memoryId = this.getAttribute("data-id")
+                  viewMemory(memoryId)
+                })
+              })
+          
+              // Edit memory
+              document.querySelectorAll(".btn-edit").forEach((btn) => {
+                btn.addEventListener("click", function () {
+                  const memoryId = this.getAttribute("data-id")
+                  editMemory(memoryId)
+                })
+              })
+          
+              // Delete memory
+              document.querySelectorAll(".btn-delete").forEach((btn) => {
+                btn.addEventListener("click", function () {
+                  const memoryId = this.getAttribute("data-id")
+                  deleteMemory(memoryId)
+                })
+              })
+            }
+          
+            // Open Letter
+            function openLetter(id) {
+              const letter = letters.find((l) => l.id === id)
+              if (!letter) return
+          
+              // Mark as opened if not already
+              if (!letter.isOpened) {
+                letter.isOpened = true
+                letter.openedAt = new Date().toISOString()
+                localStorage.setItem("futureLetters", JSON.stringify(letters))
+              }
+          
+              // Format dates
+              const createdDate = new Date(letter.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+          
+              const deliveryDate = new Date(letter.deliveryDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+          
+              const openedDate = letter.openedAt
+                ? new Date(letter.openedAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : null
+          
+              // Populate letter detail modal
+              const detailContent = document.getElementById("letter-detail-content")
+              detailContent.innerHTML = `
+                      <div class="letter-detail-header">
+                          <h2 class="letter-detail-title">${letter.title}</h2>
+                          <div class="letter-detail-dates">
+                              <span>Written: ${createdDate}</span>
+                              <span>Delivery: ${deliveryDate}</span>
+                              ${openedDate ? `<span>First opened: ${openedDate}</span>` : ""}
+                          </div>
+                      </div>
+                      <p class="letter-detail-recipient">${letter.recipient}</p>
+                      <div class="letter-detail-content">
+                          ${letter.content}
+                      </div>
+                      <p class="letter-detail-footer">From your past self</p>
+                  `
+          
+              // Show modal
+              letterDetailModal.style.display = "block"
+          
+              // Refresh the letters display to update status
+              displayLetters(searchInputLetters.value, filterSelect.value)
+            }
+          
+            // View Memory
+            function viewMemory(id) {
+              const memory = memories.find((m) => m.id === id)
+              if (!memory) return
+          
+              // Format date
+              const formattedDate = new Date(memory.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+          
+              // Get category display name
+              const categoryDisplayNames = {
+                sightseeing: "Sightseeing",
+                food: "Food & Dining",
+                adventure: "Adventure",
+                culture: "Cultural Experience",
+                nature: "Nature & Landscapes",
+                relaxation: "Relaxation",
+                other: "Other",
+              }
+          
+              // Create rating stars
+              let ratingStars = ""
+              for (let i = 1; i <= 5; i++) {
+                if (i <= memory.rating) {
+                  ratingStars += '<i class="fas fa-star"></i>'
+                } else {
+                  ratingStars += '<i class="far fa-star"></i>'
+                }
+              }
+          
+              // Create gallery HTML
+              let galleryHTML = ""
+              if (memory.images.length > 0) {
+                galleryHTML = `
+                  <h3>Photos</h3>
+                  <div class="memory-detail-gallery">
+                    ${memory.images.map((img) => `<img src="${img}" alt="Travel photo" class="gallery-image">`).join("")}
+                  </div>
+                `
+              }
+          
+              // Populate memory detail modal
+              const detailContent = document.getElementById("memory-detail-content")
+              detailContent.innerHTML = `
+                <div class="memory-detail-header">
+                  <h2 class="memory-detail-title">${memory.title}</h2>
+                  <div class="memory-detail-meta">
+                    <span class="memory-detail-meta-item"><i class="fas fa-map-marker-alt"></i> ${memory.location}</span>
+                    <span class="memory-detail-meta-item"><i class="fas fa-calendar-alt"></i> ${formattedDate}</span>
+                    <span class="memory-detail-meta-item"><i class="fas fa-tag"></i> ${categoryDisplayNames[memory.category]}</span>
+                    ${memory.companions ? `<span class="memory-detail-meta-item"><i class="fas fa-users"></i> With: ${memory.companions}</span>` : ""}
+                  </div>
+                  <div class="memory-detail-rating">${ratingStars}</div>
+                </div>
+                <div class="memory-detail-content">
+                  <p>${memory.text}</p>
+                </div>
+                ${galleryHTML}
+              `
+          
+              // Show modal
+              memoryDetailModal.style.display = "block"
+            }
+          
+            // Edit Memory
+            function editMemory(id) {
+              const memory = memories.find((m) => m.id === id)
+              if (!memory) return
+          
+              // Switch to add memory tab
+              document.querySelector('[data-tab="add-memory"]').click()
+          
+              // Fill form with memory data
+              document.getElementById("memory-title").value = memory.title
+              document.getElementById("memory-location").value = memory.location
+              document.getElementById("memory-date").value = memory.date
+              document.getElementById("memory-category").value = memory.category
+              document.getElementById("memory-text").value = memory.text
+              document.getElementById("memory-companions").value = memory.companions || ""
+          
+              // Set rating
+              if (memory.rating > 0) {
+                document.getElementById(`star${memory.rating}`).checked = true
+              }
+          
+              // Show image previews
+              imagePreviewContainer.innerHTML = ""
+              currentImages = [...memory.images]
+              memory.images.forEach((imageData) => {
+                addImagePreview(imageData)
+              })
+          
+              // Update form submission handler
+              const originalSubmitHandler = memoryForm.onsubmit
+              memoryForm.onsubmit = (e) => {
+                e.preventDefault()
+          
+                // Get form values
+                const title = document.getElementById("memory-title").value
+                const location = document.getElementById("memory-location").value
+                const date = document.getElementById("memory-date").value
+                const category = document.getElementById("memory-category").value
+                const text = document.getElementById("memory-text").value
+                const companions = document.getElementById("memory-companions").value
+          
+                // Get rating
+                const ratingInput = document.querySelector('input[name="rating"]:checked')
+                const rating = ratingInput ? Number.parseInt(ratingInput.value) : 0
+          
+                // Update memory object
+                const updatedMemory = {
+                  ...memory,
+                  title,
+                  location,
+                  date,
+                  category,
+                  text,
+                  companions,
+                  rating,
+                  images: currentImages,
+                  updatedAt: new Date().toISOString(),
+                }
+          
+                // Update in memories array
+                const index = memories.findIndex((m) => m.id === id)
+                if (index !== -1) {
+                  memories[index] = updatedMemory
+                }
+          
+                // Save to localStorage
+                localStorage.setItem("travelMemories", JSON.stringify(memories))
+          
+                // Reset form and image previews
+                memoryForm.reset()
+                imagePreviewContainer.innerHTML = ""
+                currentImages = []
+          
+                // Show success message
+                alert("Memory updated successfully!")
+          
+                // Switch to view memories tab
+                document.querySelector('[data-tab="view-memories"]').click()
+          
+                // Restore original submit handler
+                memoryForm.onsubmit = originalSubmitHandler
+              }
+            }
+          
+            // Delete Letter
+            function deleteLetter(id) {
+              if (confirm("Are you sure you want to delete this letter?")) {
+                letters = letters.filter((letter) => letter.id !== id)
+                localStorage.setItem("futureLetters", JSON.stringify(letters))
+                displayLetters(searchInputLetters.value, filterSelect.value)
+              }
+            }
+          
+            // Delete Memory
+            function deleteMemory(id) {
+              if (confirm("Are you sure you want to delete this memory?")) {
+                memories = memories.filter((memory) => memory.id !== id)
+                localStorage.setItem("travelMemories", JSON.stringify(memories))
+                displayMemories(searchInput.value, filterCategory.value, filterYear.value)
+              }
+            }
+          
+            // Search Functionality
+            searchInputLetters.addEventListener("input", function () {
+              displayLetters(this.value, filterSelect.value)
+            })
+          
+            // Search Functionality
+            searchInput.addEventListener("input", function () {
+              displayMemories(this.value, filterCategory.value, filterYear.value)
+            })
+          
+            // Filter Functionality
+            filterSelect.addEventListener("change", function () {
+              displayLetters(searchInputLetters.value, this.value)
+            })
+          
+            // Filter by Category
+            filterCategory.addEventListener("change", function () {
+              displayMemories(searchInput.value, this.value, filterYear.value)
+            })
+          
+            // Filter by Year
+            filterYear.addEventListener("change", function () {
+              displayMemories(searchInput.value, filterCategory.value, this.value)
+            })
+          
+            // View Toggle (Grid/List)
+            gridViewBtn.addEventListener("click", () => {
+              memoriesContainer.className = "grid-view"
+              gridViewBtn.classList.add("active")
+              listViewBtn.classList.remove("active")
+            })
+          
+            listViewBtn.addEventListener("click", () => {
+              memoriesContainer.className = "list-view"
+              listViewBtn.classList.add("active")
+              gridViewBtn.classList.remove("active")
+            })
+          
+            // Update Year Filter Options
+            function updateYearFilterOptions() {
+              // Get unique years from memories
+              const years = [...new Set(memories.map((memory) => new Date(memory.date).getFullYear()))]
+              years.sort((a, b) => b - a) // Sort descending
+          
+              // Clear current options except "All Years"
+              while (filterYear.options.length > 1) {
+                filterYear.remove(1)
+              }
+          
+              // Add year options
+              years.forEach((year) => {
+                const option = document.createElement("option")
+                option.value = year.toString()
+                option.textContent = year.toString()
+                filterYear.appendChild(option)
+              })
+            }
+          
+            // Update Stats
+            function updateStats() {
+              if (memories.length === 0) {
+                statPlaces.textContent = "0"
+                statCountries.textContent = "0"
+                statMemories.textContent = "0"
+                statPhotos.textContent = "0"
+                return
+              }
+          
+              // Count unique locations
+              const uniqueLocations = new Set(memories.map((memory) => memory.location))
+              statPlaces.textContent = uniqueLocations.size
+          
+              // Count unique countries (assuming format "City, Country")
+              const countries = memories.map((memory) => {
+                const parts = memory.location.split(",")
+                return parts.length > 1 ? parts[parts.length - 1].trim() : memory.location
+              })
+              const uniqueCountries = new Set(countries)
+              statCountries.textContent = uniqueCountries.size
+          
+              // Count memories
+              statMemories.textContent = memories.length
+          
+              // Count photos
+              const totalPhotos = memories.reduce((sum, memory) => sum + memory.images.length, 0)
+              statPhotos.textContent = totalPhotos
+          
+              // Update category chart
+              updateCategoryChart()
+          
+              // Update top destinations
+              updateTopDestinations()
+            }
+          
+            // Update Category Chart
+            function updateCategoryChart() {
+              // Count memories by category
+              const categoryCounts = {}
+              memories.forEach((memory) => {
+                categoryCounts[memory.category] = (categoryCounts[memory.category] || 0) + 1
+              })
+          
+              // Get category display names and colors
+              const categoryInfo = {
+                sightseeing: { name: "Sightseeing", color: "#4361ee" },
+                food: { name: "Food & Dining", color: "#f72585" },
+                adventure: { name: "Adventure", color: "#ff9e00" },
+                culture: { name: "Cultural Experience", color: "#7209b7" },
+                nature: { name: "Nature & Landscapes", color: "#38b000" },
+                relaxation: { name: "Relaxation", color: "#4cc9f0" },
+                other: { name: "Other", color: "#6c757d" },
+              }
+          
+              // Create chart legend
+              const chartLegend = document.querySelector(".chart-legend")
+              chartLegend.innerHTML = ""
+          
+              Object.keys(categoryCounts).forEach((category) => {
+                const legendItem = document.createElement("div")
+                legendItem.className = "legend-item"
+          
+                const legendColor = document.createElement("div")
+                legendColor.className = "legend-color"
+                legendColor.style.backgroundColor = categoryInfo[category].color
+          
+                const legendText = document.createElement("span")
+                legendText.textContent = `${categoryInfo[category].name} (${categoryCounts[category]})`
+          
+                legendItem.appendChild(legendColor)
+                legendItem.appendChild(legendText)
+                chartLegend.appendChild(legendItem)
+              })
+            }
+          
+            // Update Top Destinations
+            function updateTopDestinations() {
+              // Count memories by location
+              const locationCounts = {}
+              memories.forEach((memory) => {
+                locationCounts[memory.location] = (locationCounts[memory.location] || 0) + 1
+              })
+          
+              // Sort locations by count
+              const sortedLocations = Object.keys(locationCounts).sort((a, b) => locationCounts[b] - locationCounts[a])
+          
+              // Display top 5 destinations
+              destinationsList.innerHTML = ""
+          
+              if (sortedLocations.length === 0) {
+                const noData = document.createElement("p")
+                noData.className = "no-data"
+                noData.textContent = "Add more memories to see your top destinations"
+                destinationsList.appendChild(noData)
+                return
+              }
+          
+              const topLocations = sortedLocations.slice(0, 5)
+              topLocations.forEach((location) => {
+                const item = document.createElement("div")
+                item.className = "destination-item"
+          
+                item.innerHTML = `
+                  <div class="destination-name">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${location}</span>
+                  </div>
+                  <span class="destination-count">${locationCounts[location]}</span>
+                `
+          
+                destinationsList.appendChild(item)
+              })
+            }
+          
+            // Close Modals
+            closeModalBtns.forEach((btn) => {
+              btn.addEventListener("click", () => {
+                welcomeModal.style.display = "none"
+                memoryDetailModal.style.display = "none"
+              })
+            })
+          
+            // Close modal when clicking outside
+            window.addEventListener("click", (e) => {
+              if (e.target === welcomeModal) {
+                welcomeModal.style.display = "none"
+              }
+              if (e.target === memoryDetailModal) {
+                memoryDetailModal.style.display = "none"
+              }
+            })
+          
+            // Get Started button
+            getStartedBtn.addEventListener("click", () => {
+              welcomeModal.style.display = "none"
+            })
+          
+            // Initialize
+            updateYearFilterOptions()
+            displayMemories()
+            updateStats()
+          })
+          
+    </script>
+</body>
+</html>
 
