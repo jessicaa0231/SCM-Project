@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile - TimeCapsule</title>
+  <link rel="stylesheet" href="capsule.css" />
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">🕒 TimeCapsule</div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="capsule.html">➕ Create Capsule</a>
+        <a href="mycapsule.html">🗃️ My Capsules</a>
+        <a href="about.html">ℹ️ About</a>
+    
+        <a class="active" href="profile.html">👤 Profile</a>
+      
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h2>My Profile</h2>
+        <div class="top-right">
+          <input type="text" placeholder="Search..." class="search-bar" />
+          <div class="notification">🔔<span class="badge">1</span></div>
+          <div class="profile" id="top-username">👤 User</div>
+        </div>
+      </header>
+
+      <section class="profile-section">
+        <div class="profile-card">
+          <h3>👤 Profile Information</h3>
+          <label>Username:</label>
+          <input type="text" id="usernameInput" />
+
+          <label>Email:</label>
+          <input type="email" id="emailInput" disabled />
+
+          <button id="saveBtn">💾 Save Changes</button>
+          <button id="logoutBtn">🚪 Logout</button>
+        </div>
+        
+      </section>
+    </main>
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+</html>

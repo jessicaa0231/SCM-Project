@@ -1,0 +1,103 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body {
+    background-color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  
+  .login-container {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    color: #111827;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  
+  .login-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+    font-weight: 600;
+  }
+  
+  .login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    background-color: #f3f4f6;
+  }
+  
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-container button:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Footer */
+  .login-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .login-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  /* Logo Branding */
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+  }
+  
+  .brand-logo img {
+    height: 30px;
+  }
+  
+  .brand-logo span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+  }
+  

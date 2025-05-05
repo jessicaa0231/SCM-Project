@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Memories</title>
+    <link rel="stylesheet" href="travel.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="parallax-header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1><i class="fas fa-globe-americas"></i> Travel Memories</h1>
+            <p class="tagline">Capture the world, one memory at a time</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="add-memory">
+                <i class="fas fa-plus-circle"></i> Add Memory
+            </button>
+            <button class="tab-btn" data-tab="view-memories">
+                <i class="fas fa-images"></i> View Memories
+            </button>
+            <button class="tab-btn" data-tab="stats">
+                <i class="fas fa-chart-pie"></i> Travel Stats
+            </button>
+        </div>
+
+        <main>
+            <section id="add-memory" class="tab-content active">
+                <div class="form-container">
+                    <h2>Capture a Travel Memory</h2>
+                    <form id="memory-form">
+                        <div class="form-group">
+                            <label for="memory-title">Title</label>
+                            <input type="text" id="memory-title" required placeholder="Give your memory a title">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="memory-location">Location</label>
+                                <input type="text" id="memory-location" required placeholder="City, Country">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="memory-date">Date</label>
+                                <input type="date" id="memory-date" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-category">Category</label>
+                            <select id="memory-category" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="sightseeing">Sightseeing</option>
+                                <option value="food">Food & Dining</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="culture">Cultural Experience</option>
+                                <option value="nature">Nature & Landscapes</option>
+                                <option value="relaxation">Relaxation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <div class="rating-container">
+                                <div class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" />
+                                    <label for="star5"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star4" name="rating" value="4" />
+                                    <label for="star4"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star3" name="rating" value="3" />
+                                    <label for="star3"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star2" name="rating" value="2" />
+                                    <label for="star2"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star1" name="rating" value="1" />
+                                    <label for="star1"><i class="fas fa-star"></i></label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-text">Your Memory</label>
+                            <textarea id="memory-text" rows="5" required placeholder="Describe your experience..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-companions">Travel Companions (Optional)</label>
+                            <input type="text" id="memory-companions" placeholder="Who were you with?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-images">Upload Images</label>
+                            <input type="file" id="memory-images" accept="image/*" multiple>
+                            <div id="image-preview-container" class="image-preview-container">
+                                <!-- Image previews will be added here -->
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Save Memory <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-memories" class="tab-content">
+                <div class="memories-controls">
+                    <div class="search-container">
+                        <input type="text" id="search-memories" placeholder="Search memories...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="filter-container">
+                        <select id="filter-category">
+                            <option value="all">All Categories</option>
+                            <option value="sightseeing">Sightseeing</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="culture">Cultural Experience</option>
+                            <option value="nature">Nature & Landscapes</option>
+                            <option value="relaxation">Relaxation</option>
+                            <option value="other">Other</option>
+                        </select>
+                        
+                        <select id="filter-year">
+                            <option value="all">All Years</option>
+                            <!-- Years will be added dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="view-options">
+                        <button id="grid-view" class="view-btn active"><i class="fas fa-th"></i></button>
+                        <button id="list-view" class="view-btn"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <div id="memories-container" class="grid-view">
+                    <div id="no-memories" class="empty-state">
+                        <i class="fas fa-suitcase"></i>
+                        <p>No travel memories yet. Start by adding your first adventure!</p>
+                    </div>
+                    <!-- Memories will be added here dynamically -->
+                </div>
+            </section>
+
+            <section id="stats" class="tab-content">
+                <div class="stats-container">
+                    <h2>Your Travel Statistics</h2>
+                    
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Places Visited</h3>
+                                <p id="stat-places">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Countries</h3>
+                                <p id="stat-countries">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Memories</h3>
+                                <p id="stat-memories">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Photos</h3>
+                                <p id="stat-photos">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-charts">
+                        <div class="chart-container">
+                            <h3>Memories by Category</h3>
+                            <div id="category-chart" class="chart">
+                                <!-- Chart will be rendered here -->
+                                <div class="placeholder-chart">
+                                    <div class="chart-legend">
+                                        <!-- Legend items will be added dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Top Destinations</h3>
+                            <div id="destinations-list" class="destinations-list">
+                                <!-- Top destinations will be added here -->
+                                <p class="no-data">Add more memories to see your top destinations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2><i class="fas fa-globe-americas"></i> Welcome to Travel Memories!</h2>
+                <p>Your personal travel journal to capture and relive your adventures around the world.</p>
+                <ul>
+                    <li><i class="fas fa-camera"></i> <strong>Capture memories</strong> with photos and descriptions</li>
+                    <li><i class="fas fa-map-marker-alt"></i> <strong>Record locations</strong> of your adventures</li>
+                    <li><i class="fas fa-search"></i> <strong>Find memories</strong> by location, category, or date</li>
+                    <li><i class="fas fa-chart-pie"></i> <strong>View statistics</strong> about your travels</li>
+                </ul>
+                <p>Your memories are stored locally on your device.</p>
+                <button id="get-started" class="btn-primary">Start Your Journey</button>
+            </div>
+        </div>
+
+        <div id="memory-detail-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="memory-detail-content">
+                    <!-- Memory details will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Travel Memories &copy; <span id="current-year"></span></p>
+            <p class="footer-quote">"The world is a book, and those who do not travel read only one page." — Saint Augustine</p>
+        </div>
+    </footer>
+
+    <script src="travel.js"></script>
+</body>
+</html>
