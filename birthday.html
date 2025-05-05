@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Memories Time Capsule</title>
+    <link rel="stylesheet" href="birthday.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-gift"></i> Birthday Memories Time Capsule</h1>
+            <p class="tagline">Capture and cherish your special birthday moments</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="add-memory">Add Memory</button>
+            <button class="tab-btn" data-tab="view-memories">View Memories</button>
+        </div>
+
+        <main>
+            <section id="add-memory" class="tab-content active">
+                <div class="form-container">
+                    <h2>Create New Memory</h2>
+                    <form id="memory-form">
+                        <div class="form-group">
+                            <label for="memory-title">Title</label>
+                            <input type="text" id="memory-title" required placeholder="Give your memory a title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-date">Date</label>
+                            <input type="date" id="memory-date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-text">Your Memory</label>
+                            <textarea id="memory-text" rows="5" required placeholder="Write your memory here..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="memory-image">Upload Image (optional)</label>
+                            <input type="file" id="memory-image" accept="image/*">
+                            <div id="image-preview-container" class="hidden">
+                                <img id="image-preview" src="/placeholder.svg" alt="Preview">
+                                <button type="button" id="remove-image" class="btn-remove"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Save Memory <i class="fas fa-save"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-memories" class="tab-content">
+                <div class="memories-controls">
+                    <div class="search-container">
+                        <input type="text" id="search-memories" placeholder="Search memories...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="view-options">
+                        <button id="chronological-view" class="view-btn active"><i class="fas fa-calendar-alt"></i> Chronological</button>
+                        <button id="gallery-view" class="view-btn"><i class="fas fa-th"></i> Gallery</button>
+                    </div>
+                </div>
+
+                <div id="memories-container" class="chronological">
+                    <div id="no-memories" class="empty-state">
+                        <i class="fas fa-birthday-cake"></i>
+                        <p>No memories yet. Start by adding your first birthday memory!</p>
+                    </div>
+                    <!-- Memories will be added here dynamically -->
+                </div>
+            </section>
+        </main>
+
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2><i class="fas fa-birthday-cake"></i> Welcome to Your Birthday Memories Time Capsule!</h2>
+                <p>This is a special place to store and cherish your birthday memories.</p>
+                <ul>
+                    <li><i class="fas fa-plus-circle"></i> <strong>Add memories</strong> with text and photos</li>
+                    <li><i class="fas fa-search"></i> <strong>Find memories</strong> using the search feature</li>
+                    <li><i class="fas fa-th"></i> View in <strong>gallery or chronological</strong> order</li>
+                    <li><i class="fas fa-edit"></i> <strong>Edit or delete</strong> your memories anytime</li>
+                </ul>
+                <p>Your memories are stored locally on your device.</p>
+                <button id="get-started" class="btn-primary">Get Started</button>
+            </div>
+        </div>
+
+        <div id="memory-detail-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="memory-detail-content">
+                    <!-- Memory details will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Birthday Memories Time Capsule &copy; <span id="current-year"></span></p>
+    </footer>
+
+    <script src="birthday.js"></script>
+</body>
+</html>
+
+ 

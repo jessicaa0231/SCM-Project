@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter to Future Self</title>
+    <link rel="stylesheet" href="letter.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-envelope-open-text"></i> Letter to Future Self</h1>
+            <p class="tagline">Write now. Read later. Reflect forever.</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="write-letter">Write a Letter</button>
+            <button class="tab-btn" data-tab="view-letters">My Letters</button>
+        </div>
+
+        <main>
+            <section id="write-letter" class="tab-content active">
+                <div class="form-container">
+                    <h2>Compose Your Letter</h2>
+                    <form id="letter-form">
+                        <div class="form-group">
+                            <label for="letter-title">Title</label>
+                            <input type="text" id="letter-title" required placeholder="Give your letter a title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="recipient">To (Future You)</label>
+                            <input type="text" id="recipient" placeholder="Dear Future Me..." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="delivery-date">Delivery Date</label>
+                            <input type="date" id="delivery-date" required>
+                            <p class="form-hint">When should your future self receive this letter?</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="letter-content">Your Letter</label>
+                            <div class="editor-toolbar">
+                                <button type="button" data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                                <button type="button" data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                                <button type="button" data-command="underline" title="Underline"><i class="fas fa-underline"></i></button>
+                                <button type="button" data-command="insertUnorderedList" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+                                <button type="button" data-command="insertOrderedList" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                                <button type="button" data-command="createLink" title="Insert Link"><i class="fas fa-link"></i></button>
+                            </div>
+                            <div id="letter-content" class="editor-content" contenteditable="true"></div>
+                            <textarea id="letter-content-hidden" name="letter-content" hidden></textarea>
+                            <p class="form-hint">Write your thoughts, hopes, dreams, or advice to your future self.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email-notification">Email Notification (Optional)</label>
+                            <input type="email" id="email-notification" placeholder="your@email.com">
+                            <p class="form-hint">We'll notify you when it's time to open your letter.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms-checkbox" required>
+                                <span>I understand this letter will be stored locally on my device</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Send to Future <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-letters" class="tab-content">
+                <div class="letters-controls">
+                    <div class="filter-container">
+                        <select id="filter-letters">
+                            <option value="all">All Letters</option>
+                            <option value="pending">Pending Letters</option>
+                            <option value="ready">Ready to Open</option>
+                            <option value="opened">Already Opened</option>
+                        </select>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="search-letters" placeholder="Search letters...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <div id="letters-container">
+                    <div id="no-letters" class="empty-state">
+                        <i class="fas fa-envelope"></i>
+                        <p>You haven't written any letters yet. Start by writing your first letter to your future self!</p>
+                    </div>
+                    <!-- Letters will be added here dynamically -->
+                </div>
+            </section>
+        </main>
+
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2><i class="fas fa-envelope-open-text"></i> Welcome to Letter to Future Self</h2>
+                <p>This is a special place where you can write letters to your future self.</p>
+                <ul>
+                    <li><i class="fas fa-pen-fancy"></i> <strong>Write a letter</strong> to your future self</li>
+                    <li><i class="fas fa-calendar-alt"></i> <strong>Set a future date</strong> when you want to read it</li>
+                    <li><i class="fas fa-lock"></i> Your letters are <strong>stored locally</strong> on your device</li>
+                    <li><i class="fas fa-envelope-open"></i> <strong>Open your letters</strong> when the time comes</li>
+                </ul>
+                <p>It's a beautiful way to reflect on your growth, remember your goals, and connect with your past self.</p>
+                <button id="get-started" class="btn-primary">Get Started</button>
+            </div>
+        </div>
+
+        <div id="letter-detail-modal" class="modal">
+            <div class="modal-content letter-paper">
+                <span class="close-modal">&times;</span>
+                <div id="letter-detail-content">
+                    <!-- Letter details will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Letter to Future Self &copy; <span id="current-year"></span></p>
+    </footer>
+
+    <script src="letter.js"></script>
+</body>
+</html>

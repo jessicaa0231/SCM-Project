@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TimeCapsule Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">⏱ TimeCapsule</div>
+    <ul class="nav-links">
+      <li><a class="active" href="#">Dashboard</a></li>
+      <li><a href="mycapsule.html">My Capsules</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+    <div class="top-right">
+      <input type="text" placeholder="Search..." class="search-bar" />
+      <div class="notification">🔔<span class="badge">3</span></div>
+      <div class="profile" id="top-username">👤 User</div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <section class="welcome">
+      <h1>Welcome back, <span id="username">User</span>!</h1>
+      <p>Here's what's happening with your time capsules</p>
+    </section>
+    <section class="stats">
+      <div class="card">
+        <div class="icon">📦</div>
+        <div>
+          <p>Total Capsules</p>
+          <h3 id="totalCapsules">0</h3>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <div>
+          <p>Upcoming Unlocks</p>
+          <h3 id="upcomingUnlocks">0</h3>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon">🔗</div>
+        <div>
+          <p>Shared With Me</p>
+          <h3>0</h3>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon">🕒</div>
+        <div>
+          <p>Next Unlock</p>
+          <h3 id="nextUnlock">N/A</h3>
+        </div>
+      </div>
+    </section>
+    <div class="actions">
+      <button class="create-btn" onclick="window.location.href='capsule.html'">+ Create New Capsule</button>
+      <a href="mycapsule.html" class="view-all">View All</a>
+    </div>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
