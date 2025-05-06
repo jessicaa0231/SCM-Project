@@ -1,76 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Create Capsule | TimeCapsule</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="capsule.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gradient-primary: linear-gradient(135deg, #6e8efb, #a777e3);
+      --gradient-accent: linear-gradient(135deg, #ff758c, #ff7eb3);
+      --background: linear-gradient(to right, #f9f9ff, #f3f4f7);
+      --text-primary: #2d2d2d;
+      --text-secondary: #6c6c6c;
+      --card-bg: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.08) 0 8px 20px;
+      --border-color: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #ff758c;
+    }
+
+    .page-header {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-subtitle {
+      margin-top: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .capsule-type-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .capsule-type-btn {
+      background: white;
+      border: 2px solid var(--border-color);
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .capsule-type-btn:hover {
+      background: var(--gradient-accent);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .capsule-type-btn.selected {
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+    }
+
+    .custom-capsule-form {
+      background: var(--card-bg);
+      padding: 2rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.8s ease;
+    }
+
+    .custom-capsule-form label {
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+      color: #6e8efb;
+    }
+
+    .custom-capsule-form input[type="text"],
+    .custom-capsule-form input[type="date"],
+    .custom-capsule-form textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .custom-capsule-form input:focus,
+    .custom-capsule-form textarea:focus {
+      border-color: #a777e3;
+      outline: none;
+      box-shadow: 0 0 8px rgba(167, 119, 227, 0.3);
+    }
+
+    .custom-capsule-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      margin-top: 1.2rem;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: var(--gradient-primary);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(110, 142, 251, 0.3);
+    }
+
+    .success-message {
+      margin-top: 1rem;
+      color: #36B37E;
+      font-weight: 600;
+      display: none;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .navbar, .page-header, .custom-capsule-form {
+        padding: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
+
   <nav class="navbar">
     <div class="logo">⏱ TimeCapsule</div>
     <ul class="nav-links">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="mycapsule.html">My Capsules</a></li>
-      <li><a href="create.html" class="active">Create</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">My Capsules</a></li>
+      <li><a href="#" class="active">Create</a></li>
+      <li><a href="#">About</a></li>
     </ul>
-    <div class="user-section">
-      <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search capsules...">
-      </div>
-      <div class="notification-badge">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22ZM18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16Z" fill="#888888"/>
-        </svg>
-        <span class="badge">1</span>
-      </div>
-      <div class="user-profile">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M10 10C12.7625 10 15 7.7625 15 5C15 2.2375 12.7625 0 10 0C7.2375 0 5 2.2375 5 5C5 7.7625 7.2375 10 10 10ZM10 12.5C6.6625 12.5 0 14.175 0 17.5V20H20V17.5C20 14.175 13.3375 12.5 10 12.5Z" fill="#888888"/>
-        </svg>
-        <span>Jessica</span>
-      </div>
-    </div>
   </nav>
-  
-  <!-- Page Header -->
+
   <header class="page-header">
     <h1 class="page-title">Create Capsule</h1>
-    <p class="page-subtitle">
-      Choose a capsule type or create your own. Special templates: 
-      <b>Wedding Capsule</b>, <b>Travel Capsule</b>, <b>Future Capsule</b>, <b>Graduation Capsule</b>, etc. <br>
-      <span style="color:var(--accent)">Or design a custom capsule below!</span>
-    </p>
+    <p class="page-subtitle">Choose a type or design your own below:</p>
     <div class="capsule-type-bar">
-      <a href="wedding.html"><button class="capsule-type-btn">Wedding Capsule</button></a>
-      <button class="capsule-type-btn" disabled>Travel Capsule</button>
-      <button class="capsule-type-btn" disabled>Future Capsule</button>
-      <button class="capsule-type-btn" disabled>Graduation Capsule</button>
+      <button class="capsule-type-btn">Wedding Capsule</button>
+      <button class="capsule-type-btn">Graduation Capsule</button>
+      <button class="capsule-type-btn">Future Capsule</button>
       <button class="capsule-type-btn selected">Custom Capsule</button>
     </div>
   </header>
-  
-  <!-- Custom Capsule Form -->
-  <form class="custom-capsule-form" id="customCapsuleForm" autocomplete="off">
+
+  <form class="custom-capsule-form" id="customCapsuleForm">
     <label for="capsuleTitle">Capsule Title</label>
-    <input type="text" id="capsuleTitle" name="capsuleTitle" required placeholder="e.g. My Inspirations">
+    <input type="text" id="capsuleTitle" name="capsuleTitle" required placeholder="e.g. My Journey">
 
     <label for="unlockDate">Unlock Date</label>
     <input type="date" id="unlockDate" name="unlockDate" required>
 
-    <label for="capsuleContent">Your Message / Memories</label>
-    <textarea id="capsuleContent" name="capsuleContent" required placeholder="Write your message or memories here..."></textarea>
+    <label for="capsuleContent">Message / Memories</label>
+    <textarea id="capsuleContent" name="capsuleContent" required placeholder="Write your message here..."></textarea>
 
     <label for="capsuleImage">Add Image (optional)</label>
     <input type="file" id="capsuleImage" name="capsuleImage" accept="image/*">
-    <img id="imagePreview" class="image-preview" alt="Image Preview">
 
     <button type="submit" class="submit-btn">Create Capsule</button>
     <div class="success-message" id="successMsg">🎉 Capsule created successfully!</div>
   </form>
-<script src="capsule.js"></script>
+
+  <script>
+    const form = document.getElementById('customCapsuleForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      successMsg.style.display = 'block';
+      form.reset();
+    });
+  </script>
 </body>
 </html>
