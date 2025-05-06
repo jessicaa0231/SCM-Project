@@ -1,113 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Memories Time Capsule</title>
-    <link rel="stylesheet" href="birthday.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Memories</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f3f8ff;
+      color: #2c3e50;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      padding: 30px 20px;
+      text-align: center;
+      color: #34495e;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0 10px;
+      gap: 15px;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: #ffffff;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 4px 4px 10px #d1d9e6, -4px -4px 10px #ffffff;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      background: #e3f2fd;
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: #6dd5fa;
+      color: white;
+      box-shadow: inset 2px 2px 6px #51c0ef, inset -2px -2px 6px #8ae3ff;
+    }
+
+    .tab-content {
+      display: none;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 6px 6px 12px #d1d9e6, -6px -6px 12px #ffffff;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2980b9;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #f0f4f8;
+      box-shadow: inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      background: #e3f2fd;
+    }
+
+    .btn-primary {
+      margin-top: 20px;
+      display: inline-block;
+      background: #74ebd5;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.03);
+    }
+
+    .empty-state {
+      text-align: center;
+      background: #ffffff;
+      padding: 60px 30px;
+      border-radius: 16px;
+      box-shadow: 6px 6px 12px #d1d9e6, -6px -6px 12px #ffffff;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #6c5ce7;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #999;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-gift"></i> Birthday Memories Time Capsule</h1>
-            <p class="tagline">Capture and cherish your special birthday moments</p>
-        </header>
+  <header>
+    <h1><i class="fas fa-gift"></i> Birthday Memories</h1>
+    <p class="tagline">Capture your special birthday moments forever</p>
+  </header>
 
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="add-memory">Add Memory</button>
-            <button class="tab-btn" data-tab="view-memories">View Memories</button>
-        </div>
+  <div class="tabs">
+    <button class="tab-btn active">Add Memory</button>
+    <button class="tab-btn">View Memories</button>
+  </div>
 
-        <main>
-            <section id="add-memory" class="tab-content active">
-                <div class="form-container">
-                    <h2>Create New Memory</h2>
-                    <form id="memory-form">
-                        <div class="form-group">
-                            <label for="memory-title">Title</label>
-                            <input type="text" id="memory-title" required placeholder="Give your memory a title">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="memory-date">Date</label>
-                            <input type="date" id="memory-date" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="memory-text">Your Memory</label>
-                            <textarea id="memory-text" rows="5" required placeholder="Write your memory here..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="memory-image">Upload Image (optional)</label>
-                            <input type="file" id="memory-image" accept="image/*">
-                            <div id="image-preview-container" class="hidden">
-                                <img id="image-preview" src="/placeholder.svg" alt="Preview">
-                                <button type="button" id="remove-image" class="btn-remove"><i class="fas fa-times"></i></button>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary">Save Memory <i class="fas fa-save"></i></button>
-                    </form>
-                </div>
-            </section>
+  <section class="tab-content active">
+    <div class="form-container">
+      <h2>Create Memory</h2>
+      <form>
+        <label>Title</label>
+        <input type="text" placeholder="Memory title" />
 
-            <section id="view-memories" class="tab-content">
-                <div class="memories-controls">
-                    <div class="search-container">
-                        <input type="text" id="search-memories" placeholder="Search memories...">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="view-options">
-                        <button id="chronological-view" class="view-btn active"><i class="fas fa-calendar-alt"></i> Chronological</button>
-                        <button id="gallery-view" class="view-btn"><i class="fas fa-th"></i> Gallery</button>
-                    </div>
-                </div>
+        <label>Date</label>
+        <input type="date" />
 
-                <div id="memories-container" class="chronological">
-                    <div id="no-memories" class="empty-state">
-                        <i class="fas fa-birthday-cake"></i>
-                        <p>No memories yet. Start by adding your first birthday memory!</p>
-                    </div>
-                    <!-- Memories will be added here dynamically -->
-                </div>
-            </section>
-        </main>
+        <label>Memory</label>
+        <textarea rows="4" placeholder="Write your memory here..."></textarea>
 
-        <div id="welcome-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h2><i class="fas fa-birthday-cake"></i> Welcome to Your Birthday Memories Time Capsule!</h2>
-                <p>This is a special place to store and cherish your birthday memories.</p>
-                <ul>
-                    <li><i class="fas fa-plus-circle"></i> <strong>Add memories</strong> with text and photos</li>
-                    <li><i class="fas fa-search"></i> <strong>Find memories</strong> using the search feature</li>
-                    <li><i class="fas fa-th"></i> View in <strong>gallery or chronological</strong> order</li>
-                    <li><i class="fas fa-edit"></i> <strong>Edit or delete</strong> your memories anytime</li>
-                </ul>
-                <p>Your memories are stored locally on your device.</p>
-                <button id="get-started" class="btn-primary">Get Started</button>
-            </div>
-        </div>
+        <label>Image (optional)</label>
+        <input type="file" accept="image/*" />
 
-        <div id="memory-detail-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <div id="memory-detail-content">
-                    <!-- Memory details will be added here dynamically -->
-                </div>
-            </div>
-        </div>
+        <button class="btn-primary"><i class="fas fa-save"></i> Save Memory</button>
+      </form>
     </div>
+  </section>
 
-    <footer>
-        <p>Birthday Memories Time Capsule &copy; <span id="current-year"></span></p>
-    </footer>
+  <section class="tab-content">
+    <div class="empty-state">
+      <i class="fas fa-birthday-cake"></i>
+      <p>No memories yet. Start by adding one!</p>
+    </div>
+  </section>
 
-    <script src="birthday.js"></script>
+  <footer>
+    <p>&copy; 2025 Birthday Capsule. All rights reserved.</p>
+  </footer>
 </body>
 </html>
-
- 
