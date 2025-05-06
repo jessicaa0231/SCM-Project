@@ -1,145 +1,165 @@
-/* Capsule Grid Layout */
-#capsuleList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
-  
-  /* Capsule Card Styling */
-  .capsule-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-    transition: transform 0.2s ease;
-  }
-  
-  .capsule-card:hover {
-    transform: translateY(-4px);
-  }
-  
-  .capsule-card h3 {
-    color: #3f51b5;
-    margin-bottom: 10px;
-  }
-  
-  .capsule-card p {
-    margin: 4px 0;
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-  
-  .capsule-card img {
-    margin-top: 10px;
-    max-width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  .no-capsules {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #777;
-  }
-  
-
-  .delete-btn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+/* Topbar (search, notification, profile) */
+.topbar .search-bar {
+  padding: 0.5rem 1.1rem;
+  border-radius: 20px;
+  border: 1.5px solid #e3f3ff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  margin-right: 0.7rem;
+}
+.topbar .search-bar:focus {
+  border: 1.5px solid #2e8bff;
 }
 
-.delete-btn:hover {
-  background-color: #c0392b;
+.notification {
+  position: relative;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.notification .badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--accent, #ff6600);
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.profile {
+  font-size: 1.1rem;
+  color: var(--primary-text);
+  background: #f5fafd;
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    padding: 1.2rem 0.7rem;
+  }
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1rem;
+    gap: 1rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+  .auth-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  .main-content {
+    padding: 0.7rem 0.2rem;
+  }
+}
+body {
+  background: #eaf6ff;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.capsule-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem 0;
 }
 
 .capsule-card {
   background: #fff;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(46,139,255,0.10);
+  padding: 2rem 2.2rem 1.5rem 2.2rem;
+  min-width: 320px;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  animation: fadeInUp 0.9s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.capsule-card img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-  border-radius: 6px;
+.capsule-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 10px 32px rgba(46,139,255,0.16);
 }
-.unlocked-badge {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 4px 8px;
-  font-size: 12px;
+
+.capsule-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #2e8bff;
+}
+
+.capsule-title {
+  flex: 1;
+}
+
+.capsule-status {
+  background: #e3ffe3;
+  color: #1aa31a;
   border-radius: 12px;
-  margin-left: 8px;
-}
-.unlocked-badge {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 12px;
-  margin-left: 8px;
+  padding: 0.15em 0.7em;
+  font-size: 1em;
+  font-weight: 600;
+  margin-left: 0.7em;
 }
 
-.locked-badge {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 12px;
-  margin-left: 8px;
-}
-.notification-wrapper {
-  position: relative;
+.capsule-details div {
+  margin-bottom: 0.3em;
+  color: #444;
+  font-size: 1.05rem;
 }
 
-.badge {
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  position: absolute;
-  top: -5px;
-  right: -10px;
+.delete-btn {
+  align-self: flex-end;
+  background: linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255,95,109,0.10);
+  transition: background 0.18s, transform 0.18s;
+}
+.delete-btn:hover {
+  background: linear-gradient(90deg, #ff6600 0%, #ffb347 100%);
+  transform: scale(1.07);
 }
 
-.notif-dropdown {
-  display: none;
-  position: absolute;
-  top: 28px;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 260px;
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 999;
-  border-radius: 6px;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
-.notif-dropdown.show {
-  display: block;
-}
-
-.notif-dropdown p {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-  margin: 0;
-}
-
-.notif-dropdown p:last-child {
-  border-bottom: none;
+/* Responsive */
+@media (max-width: 600px) {
+  .capsule-card {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 1.3rem 0.7rem;
+  }
 }
 
