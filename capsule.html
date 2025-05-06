@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Capsule | TimeCapsule</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="capsule.css">
 </head>
 <body>
-
+  <!-- Navigation -->
   <nav class="navbar">
     <div class="logo">⏱ TimeCapsule</div>
     <ul class="nav-links">
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">My Capsules</a></li>
-      <li><a href="#" class="active">Create</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="mycapsule.html">My Capsules</a></li>
+      <li><a href="capsule.html" class="active">Create</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
+    <div class="user-section">
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search capsules...">
+      </div>
+      <div class="notification-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22ZM18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16Z" fill="#888888"/>
+        </svg>
+        <span class="badge">1</span>
+      </div>
+      <div class="user-profile">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 10C12.7625 10 15 7.7625 15 5C15 2.2375 12.7625 0 10 0C7.2375 0 5 2.2375 5 5C5 7.7625 7.2375 10 10 10ZM10 12.5C6.6625 12.5 0 14.175 0 17.5V20H20V17.5C20 14.175 13.3375 12.5 10 12.5Z" fill="#888888"/>
+        </svg>
+        <span>Jessica</span>
+      </div>
+    </div>
   </nav>
-
+  
+  <!-- Page Header -->
   <header class="page-header">
     <h1 class="page-title">Create Capsule</h1>
-    <p class="page-subtitle">Choose a type or design your own below:</p>
+    <p class="page-subtitle">
+      Special templates: 
+      
+      <span style="color:var(--accent)">Or design a custom capsule below!</span>
+    </p>
     <div class="capsule-type-bar">
-      <button class="capsule-type-btn">Wedding Capsule</button>
-      <button class="capsule-type-btn">Graduation Capsule</button>
-      <button class="capsule-type-btn">Future Capsule</button>
-      <button class="capsule-type-btn selected">Custom Capsule</button>
+
+      <a href="#"><button class="capsule-type-btn">Wedding Capsule</button></a>
+      <a href="#"><button class="capsule-type-btn">Travel Memory</button>
+        <a href="#"><button class="capsule-type-btn">Letter To Future</button>
+          <a href="#"><button class="capsule-type-btn">Birthday Capsule</button>
+            <a href="#"><button class="capsule-type-btn">Group Memories</button>
+              <a href="#"><button class="capsule-type-btn">New Year Resolution</button>
     </div>
   </header>
-
-  <form class="custom-capsule-form" id="customCapsuleForm">
+  <h2 class="page-title" style="text-align:center">Create Custom Capsule</h2>
+  <!-- Custom Capsule Form -->
+  <form class="custom-capsule-form" id="customCapsuleForm" autocomplete="off">
     <label for="capsuleTitle">Capsule Title</label>
-    <input type="text" id="capsuleTitle" name="capsuleTitle" required placeholder="e.g. My Journey">
+    <input type="text" id="capsuleTitle" name="capsuleTitle" required placeholder="e.g. My Inspirations">
 
     <label for="unlockDate">Unlock Date</label>
     <input type="date" id="unlockDate" name="unlockDate" required>
 
-    <label for="capsuleContent">Message / Memories</label>
-    <textarea id="capsuleContent" name="capsuleContent" required placeholder="Write your message here..."></textarea>
+    <label for="capsuleContent">Your Message / Memories</label>
+    <textarea id="capsuleContent" name="capsuleContent" required placeholder="Write your message or memories here..."></textarea>
 
     <label for="capsuleImage">Add Image (optional)</label>
     <input type="file" id="capsuleImage" name="capsuleImage" accept="image/*">
+    <img id="imagePreview" class="image-preview" alt="Image Preview">
 
     <button type="submit" class="submit-btn">Create Capsule</button>
     <div class="success-message" id="successMsg">🎉 Capsule created successfully!</div>
   </form>
-
-  <script>
-    const form = document.getElementById('customCapsuleForm');
-    const successMsg = document.getElementById('successMsg');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      successMsg.style.display = 'block';
-      form.reset();
-    });
-  </script>
+<script src="capsule.js"></script>
 </body>
 </html>
