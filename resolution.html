@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Year's Resolutions Time Capsule</title>
+  <link rel="stylesheet" href="resolution.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-fire"></i> New Year's Resolutions Time Capsule</h1>
+      <p class="tagline">Set, track, and celebrate your resolutions for the year!</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="add-resolution">Add Resolution</button>
+      <button class="tab-btn" data-tab="view-resolutions">View Resolutions</button>
+    </div>
+
+    <main>
+      <section id="add-resolution" class="tab-content active">
+        <div class="form-container">
+          <h2>Create New Resolution</h2>
+          <form id="resolution-form">
+            <div class="form-group">
+              <label for="resolution-title">Title</label>
+              <input type="text" id="resolution-title" required placeholder="What's your resolution?"/>
+            </div>
+
+            <div class="form-group">
+              <label for="resolution-date">Target Date</label>
+              <input type="date" id="resolution-date" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="resolution-text">Details</label>
+              <textarea id="resolution-text" rows="5" required placeholder="Describe your goal..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="resolution-image">Upload Image (optional)</label>
+              <input type="file" id="resolution-image" accept="image/*" />
+              <div id="image-preview-container" class="hidden">
+                <img id="image-preview" src="/placeholder.svg" alt="Preview" />
+                <button type="button" id="remove-image" class="btn-remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Save Resolution <i class="fas fa-save"></i></button>
+          </form>
+        </div>
+      </section>
+
+      <section id="view-resolutions" class="tab-content">
+        <div class="memories-controls">
+          <div class="search-container">
+            <input type="text" id="search-resolutions" placeholder="Search resolutions..." />
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="view-options">
+            <button id="chronological-view" class="view-btn active">
+              <i class="fas fa-calendar-alt"></i> Chronological
+            </button>
+            <button id="gallery-view" class="view-btn">
+              <i class="fas fa-th"></i> Gallery
+            </button>
+          </div>
+        </div>
+
+        <div id="resolutions-container" class="chronological">
+          <div id="no-resolutions" class="empty-state">
+            <i class="fas fa-champagne-glasses"></i>
+            <p>No resolutions yet. Start by adding your first New Year's resolution!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="welcome-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2><i class="fas fa-fire"></i> Welcome to Your New Year's Resolutions Time Capsule!</h2>
+        <p>This is your personal space to set, track, and reflect on your resolutions for the year.</p>
+        <ul>
+          <li><i class="fas fa-plus-circle"></i> <strong>Add resolutions</strong> with details and photos</li>
+          <li><i class="fas fa-search"></i> <strong>Find resolutions</strong> using the search feature</li>
+          <li><i class="fas fa-th"></i> View in <strong>gallery or chronological</strong> order</li>
+          <li><i class="fas fa-edit"></i> <strong>Edit or delete</strong> your resolutions anytime</li>
+        </ul>
+        <p>Your resolutions are stored locally on your device.</p>
+        <button id="get-started" class="btn-primary">Get Started</button>
+      </div>
+    </div>
+
+    <div id="resolution-detail-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="resolution-detail-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>New Year's Resolutions Time Capsule &copy; <span id="current-year"></span></p>
+  </footer>
+
+  <script src="resolution.js"></script>
+</body>
+</html>

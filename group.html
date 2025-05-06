@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Group Memories Time Capsule</title>
+  <link rel="stylesheet" href="group.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-users"></i> Group Memories Time Capsule</h1>
+      <p class="tagline">Collect, share, and relive your group’s best moments together!</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="add-memory">Add Memory</button>
+      <button class="tab-btn" data-tab="view-memories">View Memories</button>
+    </div>
+
+    <main>
+      <section id="add-memory" class="tab-content active">
+        <div class="form-container">
+          <h2>Add a New Group Memory</h2>
+          <form id="group-memory-form">
+            <div class="form-group">
+              <label for="group-memory-title">Title</label>
+              <input type="text" id="group-memory-title" required placeholder="Memory title (e.g. Beach Trip, Hackathon, Birthday)"/>
+            </div>
+
+            <div class="form-group">
+              <label for="group-memory-date">Date</label>
+              <input type="date" id="group-memory-date" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="group-memory-members">Who was there?</label>
+              <input type="text" id="group-memory-members" required placeholder="Names, separated by commas"/>
+            </div>
+
+            <div class="form-group">
+              <label for="group-memory-text">Memory Details</label>
+              <textarea id="group-memory-text" rows="5" required placeholder="Describe the memory..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="group-memory-image">Upload Image (optional)</label>
+              <input type="file" id="group-memory-image" accept="image/*" />
+              <div id="image-preview-container" class="hidden">
+                <img id="image-preview" src="/placeholder.svg" alt="Preview" />
+                <button type="button" id="remove-image" class="btn-remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Save Memory <i class="fas fa-save"></i></button>
+          </form>
+        </div>
+      </section>
+
+      <section id="view-memories" class="tab-content">
+        <div class="memories-controls">
+          <div class="search-container">
+            <input type="text" id="search-group-memories" placeholder="Search group memories..." />
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="view-options">
+            <button id="chronological-view" class="view-btn active">
+              <i class="fas fa-calendar-alt"></i> Chronological
+            </button>
+            <button id="gallery-view" class="view-btn">
+              <i class="fas fa-th"></i> Gallery
+            </button>
+          </div>
+        </div>
+
+        <div id="group-memories-container" class="chronological">
+          <div id="no-group-memories" class="empty-state">
+            <i class="fas fa-people-group"></i>
+            <p>No group memories yet. Start by adding your first shared moment!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="welcome-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2><i class="fas fa-users"></i> Welcome to Your Group Memories Time Capsule!</h2>
+        <p>This is your group’s space to save, share, and look back on your favorite times together.</p>
+        <ul>
+          <li><i class="fas fa-plus-circle"></i> <strong>Add group memories</strong> with stories and photos</li>
+          <li><i class="fas fa-search"></i> <strong>Find memories</strong> using the search feature</li>
+          <li><i class="fas fa-th"></i> View in <strong>gallery or chronological</strong> order</li>
+          <li><i class="fas fa-edit"></i> <strong>Edit or delete</strong> memories anytime</li>
+        </ul>
+        <p>All memories are stored locally on your device.</p>
+        <button id="get-started" class="btn-primary">Get Started</button>
+      </div>
+    </div>
+
+    <div id="memory-detail-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="memory-detail-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Group Memories Time Capsule &copy; <span id="current-year"></span></p>
+  </footer>
+
+  <script src="group.js"></script>
+</body>
+</html>
