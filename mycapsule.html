@@ -1,43 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Capsules</title>
-  <link rel="stylesheet" href="capsule.css" />
-  <link rel="stylesheet" href="mycapsule.css" />
+    <meta charset="UTF-8">
+    <title>TimeCapsule - My Capsules</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #eaf6fb;
+            color: #222;
+        }
+        /* Header */
+        .header {
+            background: #fff;
+            padding: 10px 0 0 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-left: 20px;
+            color: #6d4aff;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: #a55c9e;
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-left: 30px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .search-user {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-right: 30px;
+        }
+        .search-box {
+            border-radius: 20px;
+            border: 1px solid #d0d0d0;
+            padding: 6px 14px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .notif {
+            background: #f17732;
+            color: #fff;
+            border-radius: 50%;
+            width: 23px;
+            height: 23px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: #f3f3f3;
+            border-radius: 20px;
+            padding: 6px 14px;
+        }
+        .user-icon {
+            width: 22px;
+            height: 22px;
+            background: #b2c6e6;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        /* Main */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 36px 20px 0 20px;
+        }
+        .title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2b6fd8;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #5d6b82;
+            margin-bottom: 30px;
+            font-size: 1.08rem;
+        }
+        .capsule-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .capsule-btn, .capsule-filter {
+            border: none;
+            padding: 8px 22px;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .capsule-btn {
+            background: linear-gradient(90deg, #2b6fd8 60%, #a55c9e 100%);
+            color: #fff;
+            margin-left: auto;
+        }
+        .capsule-filter {
+            background: #fff;
+            color: #2b6fd8;
+            border: 2px solid #2b6fd8;
+            transition: background 0.2s, color 0.2s;
+        }
+        .capsule-filter.active, .capsule-filter:active {
+            background: #a55c9e;
+            color: #fff;
+            border-color: #a55c9e;
+        }
+        /* Capsules grid */
+        .capsules-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .capsule-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(44, 95, 168, 0.08);
+            padding: 18px 18px 18px 18px;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .capsule-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.18rem;
+            color: #2b6fd8;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .capsule-status {
+            display: inline-block;
+            background: #2ecc71;
+            color: #fff;
+            font-size: 0.93rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 7px;
+            vertical-align: middle;
+        }
+        .capsule-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .capsule-card .delete-btn {
+            background: #ff4c4c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 18px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 8px;
+            align-self: flex-start;
+        }
+        .capsule-info {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .capsule-info strong {
+            color: #444;
+        }
+        @media (max-width: 1050px) {
+            .capsules-grid {
+                flex-direction: column;
+                gap: 0;
+            }
+            .capsule-card {
+                width: 100%;
+                margin-bottom: 25px;
+            }
+        }
+        @media (max-width: 700px) {
+            .main-container {
+                padding: 16px 5px 0 5px;
+            }
+            .capsules-grid {
+                gap: 0;
+            }
+            .capsule-card {
+                width: 98%;
+                margin: 0 auto 18px auto;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="logo">🕒 TimeCapsule</div>
-      <nav>
-        <a class="active" href="mycapsule.html">🗃️ My Capsules</a>
-
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="capsule.html">💊 Create a Capsule</a>
-        <a href="about.html">ℹ️ About</a>
-        <a href="profile.html">👤 Profile</a>
-    
-   
-      </nav>
-    </aside>
-
-    <main class="main-content">
-      <header class="topbar">
-        <h2>My Capsules</h2>
-        <div class="top-right">
-          <input type="text" placeholder="Search..." class="search-bar" />
-          <div class="notification">🔔<span class="badge">1</span></div>
-          <div class="profile" id="top-username">👤 User</div>
-          
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+          <div class="logo">⏱ TimeCapsule</div>
         </div>
-      </header>
-
-      <section id="capsuleList"></section>
-
-    </main>
-  </div>
-
-  <script src="mycapsule.js"></script>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Create</a>
+            <a href="#">About</a>
+        </nav>
+        <div class="search-user">
+            <input class="search-box" type="text" placeholder="Search capsules...">
+            <div class="notif">!</div>
+            <div class="user">
+                <div class="user-icon"></div>
+                Jessica
+            </div>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="title">My Capsules</div>
+        <div class="subtitle">
+            Manage all your time capsules in one place. Each capsule contains memories that will be revealed at their scheduled unlock time.
+        </div>
+        <div class="capsule-controls">
+            <button class="capsule-filter active">All Capsules</button>
+            <button class="capsule-filter">Unlocked</button>
+            <button class="capsule-filter">Locked</button>
+            <a href="capsule.html">
+            <button class="capsule-btn">Create New Capsule</button>
+            </a>
+        </div>
+        <div class="capsules-grid">
+            <!-- Capsule 1 -->
+            <div class="capsule-card">
+                <h3>c1 <span class="capsule-status">Unlocked</span></h3>
+                <div class="capsule-info"><strong>Description:</strong> desc......</div>
+                <div class="capsule-info"><strong>Message:</strong> my message</div>
+                <div class="capsule-info"><strong>Category:</strong> personal</div>
+                <div class="capsule-info"><strong>Folder:</strong> None</div>
+                <div class="capsule-info"><strong>Unlock Date:</strong> 4/19/2025, 5:30:00 AM</div>
+                <div class="capsule-info"><strong>Created At:</strong> 4/16/2025, 8:51:16 PM</div>
+                <button class="delete-btn">Delete</button>
+            </div>
+            <!-- Capsule 2 -->
+            <div class="capsule-card">
+                <h3>cap2 <span class="capsule-status">Unlocked</span></h3>
+                <div class="capsule-info"><strong>Description:</strong> this is cap2</div>
+                <div class="capsule-info"><strong>Message:</strong> hello world</div>
+                <div class="capsule-info"><strong>Category:</strong> memory</div>
+                <div class="capsule-info"><strong>Folder:</strong> None</div>
+                <div class="capsule-info"><strong>Unlock Date:</strong> 4/20/2025, 5:30:00 AM</div>
+                <div class="capsule-info"><strong>Created At:</strong> 4/16/2025, 9:11:34 PM</div>
+                <img src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&w=120&h=120&fit=crop" alt="cat">
+                <button class="delete-btn">Delete</button>
+            </div>
+            <!-- Capsule 3 -->
+            <div class="capsule-card">
+                <h3>Capsule 3 <span class="capsule-status">Unlocked</span></h3>
+                <div class="capsule-info"><strong>Description:</strong> cap3</div>
+                <div class="capsule-info"><strong>Message:</strong> hmmmmmmmmmmmmmm</div>
+                <div class="capsule-info"><strong>Category:</strong> memory</div>
+                <div class="capsule-info"><strong>Folder:</strong> None</div>
+                <div class="capsule-info"><strong>Unlock Date:</strong> 4/17/2025, 5:30:00 AM</div>
+                <div class="capsule-info"><strong>Created At:</strong> 4/17/2025, 1:52:09 PM</div>
+                <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&w=120&h=120&fit=crop" alt="raccoon">
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script src="mycapsule.js"></script>
